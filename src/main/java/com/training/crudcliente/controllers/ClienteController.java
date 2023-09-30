@@ -39,7 +39,7 @@ public class ClienteController {
 
     }
 
-    @RequestMapping(value="/form{id}")
+    @RequestMapping(value="/form/{id}")
     public String editar(@PathVariable(value="id") String id, Map<String, Object> model){
         ClienteDocument cliente = null;
 
@@ -54,16 +54,16 @@ public class ClienteController {
     }
 
     @RequestMapping(value="/form", method=RequestMethod.POST)
-    public String guardar(@Valid ClienteDocument cliente, Model model, SessionStatus status){
+    public String guardar(ClienteDocument cliente, Model model, SessionStatus status){
         clienteService.save(cliente);
         status.setComplete();
         return "redirect:listar";
     }
 
-    @RequestMapping(value="/elimnar/{id}")
+    @RequestMapping(value="/eliminar/{id}")
     public String eliminar(@PathVariable(value="id") String id){
         if(id!=null){
-            clienteService.delete(id);       
+            clienteService.delete(id);      
         }
         return "redirect:/listar";
     }
